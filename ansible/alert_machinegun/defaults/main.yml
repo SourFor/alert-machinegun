@@ -1,0 +1,27 @@
+---
+# defaults file for alert_machinegun
+alert_machinegun_container_runtime: docker
+needed_packages:
+  - openssl
+  - gnupg
+  - podman
+  - docker-ce
+image_repo: "docker.io"
+alert_machinegun_version: 0.1.0
+alert_machinegun_image: "{{ image_repo }}/sourfor/alert-machinegun:{{ alert_machinegun_version }}"
+image_repo_login: "" # save it in the vault file
+image_repo_pass: "" # save it in the vault file
+alert_machinegun_user: tester
+alert_machinegun_src_dir: "/opt/alert-machinegun"
+alert_machinegun_config_dir: "{{ alert_machinegun_src_dir }}"
+alert_machinegun_config_file: "{{ alert_machinegun_config_dir }}/config.yml"
+alert_machinegun_data_dir: "{{ alert_machinegun_src_dir }}/data"
+alert_machinegun_env_dir: "/etc/alert-machinegun"
+alert_machinegun_env_file: "{{ alert_machinegun_env_dir }}/env"
+alert_machinegun_encryption_tool: "" # [ gpg | openssl ]
+alert_machinegun_encryption_key: "$uperSecret" # save it in the vault file
+alert_machinegun_alertmanager_server: "http://localhost:9093"
+alert_machinegun_alertmanager_login: "admin" # save it in the vault file
+alert_machinegun_alertmanager_password: "admin" # save it in the vault file
+alert_machinegun_on_calendar: "*-*-* 09:00:00" # format OnCalendar systemd.timer
+# TODO: container or binary execution

@@ -1,0 +1,31 @@
+---
+- name: Encrypt file with GPG
+  command: "gpg --batch --yes --passphrase '{{ alert_machinegun_encryption_key }}' --armor --symmetric --cipher-algo AES256 --output {{ alert_machinegun_config_file }}.enc {{ alert_machinegun_config_file }}"
+  when: alert_machinegun_encryption_tool == 'gpg'
+  register: encrypt
+  no_log: true
+
+- name: Encrypt file with OpenSSL
+  command: "openssl aes-256-cbc -a -salt -pbkdf2 -md sha-256 -iter 100000 -in {{ alert_machinegun_config_file }} -out {{ alert_machinegun_config_file }}.enc -k '{{ alert_machinegun_encryption_key }}'"
+  when: alert_machinegun_encryption_tool == 'openssl'
+  register: encrypt
+  no_log: true
+
+- name: after encryption
+  block:
+    - name: Remove the original file
+      ansible.builtin.file:
+        path: "{{ alert_machinegun_config_file }}"
+        state: absent
+
+    - name: Rename encrypted file as original
+      command: "mv {{ alert_machinegun_config_file }}.enc {{ alert_machinegun_config_file }}"
+
+    - name: 
+      ansible.builtin.file:
+        path: "{{ alert_machinegun_config_file }}"
+        owner: "{{ alert_machinegun_user }}"
+        group: "{{ alert_machinegun_user }}"
+        mode: '0600'
+    
+  when: encrypt is succeeded
