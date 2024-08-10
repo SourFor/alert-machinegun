@@ -1,4 +1,5 @@
 galaxy_info:
+  role_name: alert_machinegun
   author: Aleksandr Kiselev
   description: Sender of test notifications for Alertmanager
   company: 
