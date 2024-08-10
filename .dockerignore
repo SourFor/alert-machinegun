@@ -187,4 +187,3 @@ Dockerfile
 # App
 /enc-config.yml
 /config*
-/ansible

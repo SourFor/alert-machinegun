@@ -1,9 +1,0 @@
-{
-    "labels": {
-        "alertname": "Scheduled alert"
-    },
-    "annotations": {
-        "info": "This alert was sent by the verification tool"
-    },
-    "generatorURL": "localhost:80"
-}

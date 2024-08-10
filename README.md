@@ -74,3 +74,7 @@ sudo docker run --rm \
 sourfor/alert-machinegun:0.1.0 \
 /opt/alert-machinegun/alert-machinegun --gpg
 ```
+
+## Ansible role
+
+[Ansible role](https://github.com/SourFor/ansible-role-alert-machinegun)

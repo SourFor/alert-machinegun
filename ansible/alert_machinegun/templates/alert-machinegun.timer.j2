@@ -1,9 +1,0 @@
-[Unit]
-Description=Run alert-machinegun service at time
-
-[Timer]
-OnCalendar={{ alert_machinegun_on_calendar }}
-Persistent=true
-
-[Install]
-WantedBy=timers.target
